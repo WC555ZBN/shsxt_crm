@@ -21,7 +21,12 @@
     from t_user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="queryUserByUserName" resultType="com.shsxt.crm.vo.User">
+      select  <include refid="Base_Column_List" />
+      from t_user
+       where user_name=#{userName} and is_valid=1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>

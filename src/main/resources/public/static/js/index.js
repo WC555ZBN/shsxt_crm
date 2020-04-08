@@ -28,8 +28,8 @@ function login() {
                  */
                 $.cookie("userIdStr",result.userIdStr);
                 $.cookie("userName",result.userName);
-                $.cookie("trueName",result.trueName);
-                window.location.href=ctx+"/main";
+                $.cookie("userPwd",result.trueName);
+               window.location.href=ctx+"/main";
             }else{
                 alert(data.msg);
             }
