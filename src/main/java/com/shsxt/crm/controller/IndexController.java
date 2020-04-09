@@ -1,6 +1,7 @@
 package com.shsxt.crm.controller;
 
 import com.shsxt.base.BaseController;
+import com.shsxt.crm.exceptions.ParamsException;
 import com.shsxt.crm.service.UserService;
 import com.shsxt.crm.vo.User;
 import com.shsxt.utils.LoginUserUtil;
@@ -22,7 +23,9 @@ public class IndexController extends BaseController {
      */
     @RequestMapping("index")
     public String index(){
-
+        /*if(1==1){
+            throw  new ParamsException("参数异常");
+        }*/
         return "index";
     }
 
