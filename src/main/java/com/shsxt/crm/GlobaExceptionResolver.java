@@ -92,9 +92,9 @@ public class GlobaExceptionResolver implements HandlerExceptionResolver {
 
             }
         }else{
-
+            return mv;
         }
 
-        return mv;
+
     }
 }

@@ -1,13 +1,19 @@
 package com.shsxt.crm.controller;
 
 import com.shsxt.base.BaseController;
+import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.query.SaleChanceQuery;
 import com.shsxt.crm.service.SaleChanceService;
+import com.shsxt.crm.service.UserService;
+import com.shsxt.crm.vo.SaleChance;
+import com.shsxt.crm.vo.User;
+import com.shsxt.utils.LoginUserUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -16,7 +22,8 @@ public class SaleChanceController  extends BaseController {
 
     @Resource
     private SaleChanceService saleChanceService;
-
+    @Resource
+    private UserService userService;
     @RequestMapping("index")
     public String index(){
         return "sale_chance";
@@ -28,4 +35,28 @@ public class SaleChanceController  extends BaseController {
         return saleChanceService.querySaleChancesByParams(saleChanceQuery);
     }
 
+    @RequestMapping("save")
+    @ResponseBody
+    public ResultInfo saveSaleChance(HttpServletRequest request ,SaleChance saleChance){
+        /*int userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        User user = userService.selectByPrimaryKey(userId);
+        saleChance.setCreateMan(user.getTrueName());*/
+
+        saleChance.setCreateMan(userService.selectByPrimaryKey(LoginUserUtil.releaseUserIdFromCookie(request)).getTrueName());
+        saleChanceService.saveSaleChance(saleChance);
+        return success("机会数据添加成功");
+    }
+
+    @RequestMapping("update")
+    @ResponseBody
+    public ResultInfo updateSaleChance(SaleChance saleChance){
+        saleChanceService.updateSaleChance(saleChance);
+        return success("机会数据更新成功");
+    }
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteSaleChance(Integer[] ids){
+        saleChanceService.deleteBatch(ids);
+        return success("机会数据删除成功");
+    }
 }
