@@ -1,6 +1,7 @@
 package com.shsxt.crm.controller;
 
 import com.shsxt.base.BaseController;
+import com.shsxt.crm.annotaions.RequirePermission;
 import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.query.SaleChanceQuery;
 import com.shsxt.crm.service.SaleChanceService;
@@ -31,12 +32,14 @@ public class SaleChanceController  extends BaseController {
 
     @RequestMapping("list")
     @ResponseBody
+    @RequirePermission(code = "101001")
     public Map<String,Object> querySaleChancesByParams(SaleChanceQuery saleChanceQuery){
         return saleChanceService.querySaleChancesByParams(saleChanceQuery);
     }
 
     @RequestMapping("save")
     @ResponseBody
+    @RequirePermission(code = "101002")
     public ResultInfo saveSaleChance(HttpServletRequest request ,SaleChance saleChance){
         /*int userId = LoginUserUtil.releaseUserIdFromCookie(request);
         User user = userService.selectByPrimaryKey(userId);
@@ -49,12 +52,14 @@ public class SaleChanceController  extends BaseController {
 
     @RequestMapping("update")
     @ResponseBody
+    @RequirePermission(code = "101004")
     public ResultInfo updateSaleChance(SaleChance saleChance){
         saleChanceService.updateSaleChance(saleChance);
         return success("机会数据更新成功");
     }
     @RequestMapping("delete")
     @ResponseBody
+    @RequirePermission(code = "101003")
     public ResultInfo deleteSaleChance(Integer[] ids){
         saleChanceService.deleteBatch(ids);
         return success("机会数据删除成功");

@@ -2,6 +2,7 @@ package com.shsxt.base;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shsxt.crm.dto.TreeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -115,5 +116,7 @@ public abstract class BaseService<T,ID> {
         return result;
 
     }
+
+
 
 }
