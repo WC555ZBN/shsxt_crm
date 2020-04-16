@@ -2,6 +2,7 @@ package com.shsxt.crm.controller;
 
 import com.shsxt.base.BaseController;
 import com.shsxt.crm.exceptions.ParamsException;
+import com.shsxt.crm.service.ModuleService;
 import com.shsxt.crm.service.PermissionService;
 import com.shsxt.crm.service.UserService;
 import com.shsxt.crm.vo.User;
@@ -21,6 +22,9 @@ public class IndexController extends BaseController {
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
+
+    @Resource
+    private ModuleService moduleService;
     /**
      * 登录页
      * @return
@@ -41,8 +45,9 @@ public class IndexController extends BaseController {
     public String main(HttpServletRequest request){
         Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
         List<String> permissions=permissionService.queryUserHasRolesHasPermissions(userId);
-
         request.getSession().setAttribute("permissions",permissions);
+
+        request.getSession().setAttribute("modules",moduleService.queryUserHasRoleHasModuleDtos(userId));
         request.setAttribute("user",userService.selectByPrimaryKey(userId)); ;
         return "main";
     }
