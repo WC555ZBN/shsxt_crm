@@ -54,7 +54,7 @@
                placeholder="密码" name="password"/>
     </div>
     <div class="form-actions">
-        <button onclick="login()" class="btn btn-success uppercase btn-xs btn-block">登录</button>
+        <button onclick="login()" class="btn btn-success uppercase btn-xs btn-block" >登录</button>
     </div>
 
     <div class="create-account">

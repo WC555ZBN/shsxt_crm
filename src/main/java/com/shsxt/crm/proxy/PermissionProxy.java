@@ -1,4 +1,4 @@
-package com.shsxt.proxy;
+package com.shsxt.crm.proxy;
 
 import com.shsxt.crm.annotaions.RequirePermission;
 import com.shsxt.crm.exceptions.AuthFailedException;
